@@ -1,0 +1,23 @@
+version: '3.4'
+
+services:
+  management.system.api:
+    image: ${DOCKER_REGISTRY-}managementsystemapi
+    container_name: management-system-api-dev
+    build:
+      context: .
+      dockerfile: src/Api/Management.System.Api/Dockerfile
+    ports:
+      - "5000:5000"
+      - "5001:5001" 
+
+  db:
+    image: postgres:latest
+    restart: always
+    container_name: management-system-db
+    environment: 
+      POSTGRES_USER: "user"
+      POSTGRES_PASSWORD: pass_1234
+      POSTGRES_DB: management_system_db
+    ports:
+      - "5432:5432"

@@ -54,7 +54,6 @@ public class AuthServiceUnitTests
         };
 
         _userServiceMock.Setup(u => u.GetByEmailAsync(email)).ReturnsAsync(user);
-        //_customerRepositoryMock.Setup(m => m.GetByEmailAsync(customer.Email)).ReturnsAsync(new CustomerEntity { CustomerId = customerId.CustomerId, Name = customer.Name, Email = customer.Email, UserId = customer.UserId });
         _customerServiceMock.Setup(c => c.GetByEmailAsync(email)).ReturnsAsync(new CustomerDto { CustomerId = customer.CustomerId, Name = customer.Name, Email = customer.Email, UserId = user.UserId }); ;
 
         var settings = new JwtSettings { SecretKey = "6EA2A01EB704C7F0337F4FAC7C1B3F5B" };

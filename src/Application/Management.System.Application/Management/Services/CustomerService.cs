@@ -2,7 +2,6 @@
 using Management.System.Domain.Management.Services;
 using Management.System.Domain.Management.Services.Dtos;
 using Management.System.Domain.Management.Repositories;
-using Microsoft.Extensions.Logging;
 
 namespace Management.System.Application.Management.Services;
 

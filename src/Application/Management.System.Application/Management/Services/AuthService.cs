@@ -1,6 +1,5 @@
 ﻿using Management.System.Common.Helpers;
 using Management.System.Domain.Management.Services;
-using Management.System.Domain.Management.Repositories;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
@@ -39,8 +38,6 @@ public class AuthService : IAuthService
             var user = await _userService.GetByEmailAsync(email);
 
             var customer = await _customerService.GetByEmailAsync(email);
-
-            //var customer = await _customerRepository.GetByEmailAsync(email);
 
             if (user == null || !user.Password.Equals(password.CreateHash()))
             {

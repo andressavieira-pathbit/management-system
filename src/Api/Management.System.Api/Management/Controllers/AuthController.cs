@@ -39,7 +39,7 @@ public class AuthController : ControllerBase
         {
             var user = await _userService.GetByEmailAsync(loginRequest.Email);
 
-            var token = await _authService.CreateAsync(user.Email, loginRequest.Password);
+            var token = await _authService.CreateAsync(user!.Email, loginRequest.Password);
 
             return Created(string.Empty, new { Token = token });
         }

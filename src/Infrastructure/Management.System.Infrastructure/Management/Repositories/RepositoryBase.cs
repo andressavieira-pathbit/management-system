@@ -1,9 +1,8 @@
 ﻿using Management.System.Domain.Management.Repositories;
-using Management.System.Infrastructure.Repository;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics.CodeAnalysis;
 
-namespace Management.System.Infrastructure.Repositories;
+namespace Management.System.Infrastructure.Management.Repositories;
 
 [ExcludeFromCodeCoverage]
 public class RepositoryBase<EntityT> : IRepositoryBase<EntityT> where EntityT : class

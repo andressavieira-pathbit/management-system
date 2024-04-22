@@ -1,11 +1,10 @@
 ﻿using Management.System.Common.Helpers;
 using Management.System.Domain.Management.Entities;
 using Management.System.Domain.Management.Repositories;
-using Management.System.Infrastructure.Repository;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics.CodeAnalysis;
 
-namespace Management.System.Infrastructure.Repositories;
+namespace Management.System.Infrastructure.Management.Repositories;
 
 [ExcludeFromCodeCoverage]
 public class UserRepository : IUserRepository
@@ -19,7 +18,7 @@ public class UserRepository : IUserRepository
 
     public async Task<UserEntity?> GetByIdAsync(Guid id)
     {
-       return await _context.Users.FindAsync(id);
+        return await _context.Users.FindAsync(id);
     }
 
     public async Task<UserEntity?> GetByEmailAsync(string email)

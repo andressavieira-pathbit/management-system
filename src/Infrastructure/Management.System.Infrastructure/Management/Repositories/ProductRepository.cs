@@ -1,32 +1,31 @@
 ﻿using Management.System.Domain.Management.Entities;
 using Management.System.Domain.Management.Repositories;
-using Management.System.Infrastructure.Repository;
 using System.Diagnostics.CodeAnalysis;
 
-namespace Management.System.Infrastructure.Repositories;
+namespace Management.System.Infrastructure.Management.Repositories;
 
 [ExcludeFromCodeCoverage]
-public class OrderRepository : IOrderRepository
+public class ProductRepository : IProductRepository
 {
     private readonly Context _context;
 
-    public OrderRepository(Context context)
+    public ProductRepository(Context context)
     {
         _context = context;
     }
 
-    public async Task<OrderEntity?> GetByIdAsync(Guid id)
+    public async Task<ProductEntity?> GetByIdAsync(Guid id)
     {
-        return await _context.Orders.FindAsync(id);
+        return await _context.Products.FindAsync(id);
     }
 
-    public async Task CreateAsync(OrderEntity orderEntity)
+    public async Task CreateAsync(ProductEntity productEntity)
     {
-        await _context.Orders.AddAsync(orderEntity);
+        await _context.Products.AddAsync(productEntity);
         await _context.SaveChangesAsync();
     }
 
-    public async Task UpdateAsync(Guid id, OrderEntity orderEntity)
+    public async Task UpdateAsync(Guid id, ProductEntity productEntity)
     {
         var result = await _context.Products.FindAsync(id);
 

@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics.CodeAnalysis;
 
-namespace Management.System.Infrastructure.Repository;
+namespace Management.System.Infrastructure.Management.Repositories;
 
 [ExcludeFromCodeCoverage]
 public class Context : DbContext

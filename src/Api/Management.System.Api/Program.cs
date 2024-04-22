@@ -1,53 +1,21 @@
+using Management.System.Api;
 using Management.System.Application;
 using Management.System.Common.Settings;
 using Management.System.Infrastructure;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Serilog;
 using System.Text;
-using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
 var configuration = builder.Configuration;
 
-builder.Services.AddControllers()
-    .AddJsonOptions(options =>
-    {
-        options.JsonSerializerOptions.PropertyNameCaseInsensitive = false;
-        options.JsonSerializerOptions.PropertyNamingPolicy = null;
-        options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
-    });
-
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-
-builder.Services.AddSwaggerGen(options =>
-{
-    options.TagActionsBy(api =>
-    {
-        if (api.GroupName != null)
-        {
-            return [api.GroupName];
-        }
-
-        if (api.ActionDescriptor is ControllerActionDescriptor controllerActionDescriptor)
-        {
-            return [controllerActionDescriptor.ControllerName];
-        }
-
-        throw new InvalidOperationException("Unable to determine tag for endpoint.");
-    });
-
-    options.DocInclusionPredicate((name, api) => true);
-    options.CustomSchemaIds(type => type.ToString());
-
-});
-
+builder.Services.AddApiServices(configuration);
 builder.Services.AddInfrastructureServices(configuration);
 builder.Services.AddApplicationServices();
+
 builder.Services.AddOptions<JwtSettings>().Configure(config =>
 {
     config.SecretKey = configuration.GetSection("JwtSettings:SecretKey").Value ?? string.Empty;
@@ -80,17 +48,6 @@ builder.Logging.AddSerilog(logger);
 
 var app = builder.Build();
 
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+app.UseApiServices();
 
-app.UseHttpsRedirection();
-
-app.UseAuthentication();
-app.UseAuthorization();
-
-app.MapControllers();
-
-app.Run();
+await app.RunAsync();

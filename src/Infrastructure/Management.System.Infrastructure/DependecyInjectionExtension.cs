@@ -1,10 +1,9 @@
 ﻿using Management.System.Domain.Management.Repositories;
-using Management.System.Infrastructure.Repositories;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Management.System.Infrastructure.Repository;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics.CodeAnalysis;
+using Management.System.Infrastructure.Management.Repositories;
 
 namespace Management.System.Infrastructure;
 

@@ -1,9 +1,8 @@
 ﻿using Management.System.Domain.Management.Repositories;
 using Microsoft.EntityFrameworkCore.Storage;
-using Management.System.Infrastructure.Repository;
 using System.Diagnostics.CodeAnalysis;
 
-namespace Management.System.Infrastructure.Repositories;
+namespace Management.System.Infrastructure.Management.Repositories;
 
 [ExcludeFromCodeCoverage]
 public class UnitOfWork : IUnitOfWork
